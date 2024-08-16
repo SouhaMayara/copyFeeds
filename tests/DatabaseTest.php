@@ -14,23 +14,10 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        // Use in-memory SQLite databases for testing
         $this->prodDb = new PDO('sqlite::memory:');
         $this->devDb = new PDO('sqlite::memory:');
-
-//        $this->database = $this->getMockBuilder(Database::class)
-//            ->onlyMethods(['createConnection'])
-//            ->getMock();
-//        $this->database->method('createConnection')
-//            ->will($this->returnValueMap([
-//                ['pgsql:host=postgres;dbname=prod_db', 'user', 'password', $this->prodDb],
-//                ['pgsql:host=postgres;dbname=dev_db', 'user', 'password', $this->devDb]
-//            ]));
-        // Instantiate the Database class with PDO instances
-//        $this->database = new Database($this->prodDb, $this->devDb);
         $this->database = new Database(true);
     }
-
 
 
     public function testCopyFeed()
@@ -50,9 +37,4 @@ class DatabaseTest extends TestCase
         $this->assertNotEmpty($post);
         $this->assertEquals('http://example.com', $post['url']);
     }
-
-//    protected function tearDown(): void
-//    {
-//        $this->database->truncateDevDb();
-//    }
 }
