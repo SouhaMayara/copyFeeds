@@ -1,0 +1,12 @@
+<?php
+require __DIR__ . '/../vendor/autoload.php';
+
+use App\CopyFeedCommand;
+use App\Database;
+use Symfony\Component\Console\Application;
+
+$app = new Application();
+
+$database = new Database();
+$app->add(new CopyFeedCommand($database));
+$app->run();
